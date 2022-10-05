@@ -56,7 +56,47 @@ const gridHelper = new THREE.GridHelper(200, 50);
 scene.add(lightHelper, gridHelper);
 
 const controls = new OrbitControls(camera, renderer.domElement);
+//avatar
 
+const dogFaceTexture = new THREE.TextureLoader().load('../public/dogface.jpg');
+const dogface = new THREE.Mesh(
+  new THREE.BoxGeometry(3, 3, 3),
+  new THREE.MeshBasicMaterial({ map: dogFaceTexture })
+);
+scene.add(dogface);
+
+function addFloatingDog() {
+  const geometry = new THREE.SphereGeometry(0.25, 24, 24);
+  const material = new THREE.MeshStandardMaterial({ color: 0xffffff });
+  const star = new THREE.Mesh(
+    geometry,
+    new THREE.MeshBasicMaterial({ map: dogFaceTexture })
+  );
+  const [x, y, z] = Array(3)
+    .fill()
+    .map(() => THREE.MathUtils.randFloatSpread(100));
+  star.position.set(x, y, z);
+  scene.add(star);
+}
+
+Array(200).fill().forEach(addFloatingDog);
+
+//moon
+
+const dogTexture = new THREE.TextureLoader().load('../public/dog.jpg');
+const dog = new THREE.Mesh(
+  new THREE.SphereGeometry(3, 32, 32),
+  new THREE.MeshStandardMaterial({
+    map: dogTexture
+  })
+);
+scene.add(dog);
+
+//background, can show loading bar with callback
+const grassTexture = new THREE.TextureLoader().load(
+  '../public/grassy-hill-bg.jpg'
+);
+scene.background = grassTexture;
 function animate() {
   //tell browser to repaint
   requestAnimationFrame(animate);
@@ -65,6 +105,7 @@ function animate() {
   torus.rotation.x += 0.01;
   torus.rotation.y += 0.005;
   torus.rotation.z += 0.01;
+  controls.update();
 
   renderer.render(scene, camera);
 }
