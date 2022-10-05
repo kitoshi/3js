@@ -90,6 +90,8 @@ const dog = new THREE.Mesh(
     map: dogTexture
   })
 );
+dog.position.z = 10;
+dog.position.setX(8);
 scene.add(dog);
 
 //background, can show loading bar with callback
