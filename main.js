@@ -58,7 +58,7 @@ scene.add(lightHelper, gridHelper);
 const controls = new OrbitControls(camera, renderer.domElement);
 //avatar
 
-const dogFaceTexture = new THREE.TextureLoader().load('../public/dogface.jpg');
+const dogFaceTexture = new THREE.TextureLoader().load('dogface.jpg');
 const dogface = new THREE.Mesh(
   new THREE.BoxGeometry(3, 3, 3),
   new THREE.MeshBasicMaterial({ map: dogFaceTexture })
@@ -83,7 +83,7 @@ Array(200).fill().forEach(addFloatingDog);
 
 //moon
 
-const dogTexture = new THREE.TextureLoader().load('../public/dog.jpg');
+const dogTexture = new THREE.TextureLoader().load('dog.jpg');
 const dog = new THREE.Mesh(
   new THREE.SphereGeometry(3, 32, 32),
   new THREE.MeshStandardMaterial({
@@ -93,9 +93,7 @@ const dog = new THREE.Mesh(
 scene.add(dog);
 
 //background, can show loading bar with callback
-const grassTexture = new THREE.TextureLoader().load(
-  '../public/grassy-hill-bg.jpg'
-);
+const grassTexture = new THREE.TextureLoader().load('grassy-hill-bg.jpg');
 scene.background = grassTexture;
 function animate() {
   //tell browser to repaint
